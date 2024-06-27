@@ -73,6 +73,10 @@ def scrape_udemy_course(url):
 
             for lecture in lectures:
                 lecture_title_tag = lecture.find('span', class_='section--item-title--EWIuI')
+
+                if lecture_title_tag is None:
+                    lecture_title_tag = lecture.find('button', class_='section--item-title--EWIuI')
+
                 lecture_title = lecture_title_tag.text.strip() if lecture_title_tag else 'No lecture title found'
 
                 duration_tag = lecture.find('span', class_='section--hidden-on-mobile---ITMr '
