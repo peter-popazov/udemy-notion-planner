@@ -11,7 +11,7 @@ from selenium.common.exceptions import TimeoutException
 TIME_OUT_IN_SECONDS = 15
 
 
-def scrape_udemy_course(url):
+def scrape_udemy_course(url, sections_to_remove=None):
     # Initialize the Chrome driver with the options
     driver = webdriver.Chrome()
 
@@ -56,6 +56,10 @@ def scrape_udemy_course(url):
             # Extract section title
             section_title_tag = section.find('span', class_='section--section-title--svpHP')
             section_title = section_title_tag.text.strip() if section_title_tag else 'No section title found'
+
+            # Skip this section if it is in the sections to remove list
+            if sections_to_remove and section_title in sections_to_remove:
+                continue
 
             section_data = {
                 "section_title": section_title,
