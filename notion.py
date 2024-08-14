@@ -1,15 +1,16 @@
 import os
 import math
+import re
 from dotenv import load_dotenv
 from notion_client import Client
 from datetime import datetime, timedelta
 
+SKIP_LECTURE_TIME = 20
 
-def planer_create(data):
-    # Load environment variables from .env file
+
+def setup_notion() -> tuple[Client, str]:
     load_dotenv()
 
-    # Initialize Notion client
     token = os.getenv('NOTION_TOKEN')
     page_id = os.getenv('NOTION_PAGE_ID')
 
@@ -17,127 +18,173 @@ def planer_create(data):
         raise ValueError("Missing Notion token or page ID")
 
     client = Client(auth=token)
-
-    # Create callout block
     create_block(client, page_id, "callout", "This database was generated automatically")
 
-    # Create the database
+    return client, page_id
+
+
+def planner_create_block(data: dict) -> None:
+    client, page_id = setup_notion()
     db_id = create_database(client, page_id, data['title'])
 
-    initial_start_date = get_date()
-    while not initial_start_date:
-        initial_start_date = get_date()
-    start_date = initial_start_date
+    user_inputs = get_user_input()
+    start_date = user_inputs['start_date']
+    daily_minutes = user_inputs['daily_minutes']
+    days_factor = user_inputs['days_factor']
+    play_speed = user_inputs['play_speed']
 
-    # Store the initial start time
-    initial_start_time = initial_start_date.time()
-
-    # Get user inputs
-    days_factor = get_days_factor()
-    daily_minutes = get_daily_minutes()
-    daily_minutes_remaining = daily_minutes
+    current_date = start_date
 
     for section in data['sections']:
-        section_title = section['section_title']
-        for lecture in section['lectures']:
-            lecture_title = lecture['lecture_title']
-            duration_min = duration_to_minutes(lecture['duration'])
+        section_time = round(section_total_minutes(section['time']) / play_speed)
+        counter_parts = 1
 
-            # Determine the lecture type
-            lec_type = determine_lecture_type(lecture_title)
+        while section_time > 0:
+            if section_time < SKIP_LECTURE_TIME:
+                print(f"Remaining time [{section_time}] min. is less than {SKIP_LECTURE_TIME} minutes, skipping.")
+                break
 
-            # Handle cases where duration parsing fails
-            if duration_min is None:
-                duration_min = 0
+            time_for_page = min(daily_minutes, section_time)
 
-            # Check if the lecture fits within the daily limit
-            if duration_min > daily_minutes_remaining:
-                # Move to the next study day at the specified start time
-                start_date += timedelta(days=days_factor)
-                start_date = start_date.replace(hour=initial_start_time.hour, minute=initial_start_time.minute,
-                                                second=0, microsecond=0)
-                daily_minutes_remaining = daily_minutes
+            start_date_next = current_date
+            end_date = start_date_next + timedelta(minutes=time_for_page)
 
-            end_date = start_date + timedelta(minutes=duration_min)
-
-            # Decrease the remaining minutes for the day
-            daily_minutes_remaining -= duration_min
-
-            # Check if the lecture exceeds the day limit and move to the next day if necessary
-            if daily_minutes_remaining < 0:
-                # Move to the next study day at the specified start time
-                start_date += timedelta(days=days_factor)
-                start_date = start_date.replace(hour=initial_start_time.hour, minute=initial_start_time.minute,
-                                                second=0, microsecond=0)
-                daily_minutes_remaining = daily_minutes - duration_min  # Start the new day with the current lecture
-
-            properties = prepare_page_properties(section_title, lecture_title, duration_min, start_date, end_date, lec_type)
-
+            properties = prepare_page_properties(
+                section['section_title'],
+                f"{section['section_title']} p.{counter_parts}",
+                time_for_page,
+                start_date_next,
+                end_date,
+                ""
+            )
             response = create_page(client, db_id, properties)
             print(f"Created database page with ID: {response['id']}")
 
-            # Update start_date to end_date for the next lecture
+            section_time -= time_for_page
+            current_date = current_date + timedelta(days=days_factor)
+            counter_parts += 1
+
+
+def planer_create(data: dict) -> None:
+    client, page_id = setup_notion()
+    db_id = create_database(client, page_id, data['title'])
+
+    user_inputs = get_user_input()
+    start_date = initial_start_date = user_inputs['start_date']
+    daily_minutes = user_inputs['daily_minutes']
+    days_factor = user_inputs['days_factor']
+    play_speed = user_inputs['play_speed']
+    daily_minutes_remaining = daily_minutes
+
+    for section in data['sections']:
+        for lecture in section['lectures']:
+            lecture_title = lecture['lecture_title']
+            duration_min = lecture_duration(lecture['duration']) // play_speed
+            lec_type = determine_lecture_type(lecture_title)
+
+            if duration_min > daily_minutes_remaining:
+                start_date, daily_minutes_remaining = reset_start_date(initial_start_date, days_factor, daily_minutes)
+
+            end_date = start_date + timedelta(minutes=duration_min)
+            daily_minutes_remaining -= duration_min
+
+            if daily_minutes_remaining < 0:
+                start_date, daily_minutes_remaining = reset_start_date(
+                    initial_start_date, days_factor, daily_minutes - duration_min
+                )
+
+            properties = prepare_page_properties(
+                section['section_title'], lecture_title, duration_min, start_date, end_date, lec_type
+            )
+            response = create_page(client, db_id, properties)
+            print(f"Created database page with ID: {response['id']}")
             start_date = end_date
 
 
-def get_days_factor():
+def get_user_input():
+    # Start date and time input
+    print("\nWhen do you want to start learning?")
+
     while True:
         try:
-            days_factor = int(input("You want to study every i.e. 1 day, 2 days, etc.: "))
-            return days_factor
+            date_input = input("Enter a date (YYYY-MM-DD): ")
+            time_input = input("Enter a time (HH:MM): ")
+            start_date = datetime.strptime(f"{date_input} {time_input}:00", "%Y-%m-%d %H:%M:%S")
+            break
         except ValueError:
-            print("Invalid input. Please enter a valid number of days i.e. 1, 2, 3, etc.")
+            print("\nInvalid date or time format. Please try again.")
 
-
-def get_daily_minutes():
+    # Daily hours input
     while True:
         try:
             daily_hours = float(input("How many hours a day do you want to study?: "))
-            daily_minutes = int(daily_hours * 60)
-            return daily_minutes
+            if 0 < daily_hours < 24:
+                daily_minutes = int(daily_hours * 60)
+                break
+            else:
+                print("Please enter a number between 0 and 24.")
         except ValueError:
             print("Invalid input. Please enter a valid number of hours.")
 
+    # Days factor input
+    while True:
+        try:
+            days_factor = int(input("You want to study every i.e. 1 day, 2 days, etc.: "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid number of days i.e. 1, 2, 3, etc.")
 
-# Determine the type of lecture based on title
-def determine_lecture_type(lecture_title):
-    if "Quiz" in lecture_title:
-        return "Quiz"
-    elif "Practice" in lecture_title or "practice" in lecture_title:
-        return "Practice"
-    elif "Challenge" in lecture_title or "challenge" in lecture_title:
-        return "Challenge"
-    elif "Assignment" in lecture_title or "assignment" in lecture_title:
-        return "Assignment"
-    else:
-        return "Lecture"
+    # Video play speed input
+    while True:
+        play_speed = input('You usually play video at which speed (e.g., 0.75x, 1x, etc.). Enter only number: ').strip()
+        if play_speed:
+            play_speed = float(play_speed)
+            break
+        else:
+            print("Please enter a valid number.")
 
-
-# Get start date from the user
-def get_date():
-    print("When do you want start learning?")
-    date_input = input("Enter a date (YYYY-MM-DD): ")
-    time_input = input("Enter a time (HH:MM): ")
-
-    datetime_input = f"{date_input} {time_input}:00"
-    try:
-        parsed_datetime = datetime.strptime(datetime_input, "%Y-%m-%d %H:%M:%S")
-        return parsed_datetime
-    except ValueError:
-        print("Invalid date or time format. Please try again.")
-        return None
+    return {'start_date': start_date, 'daily_minutes': daily_minutes, 'days_factor': days_factor,
+            'play_speed': play_speed}
 
 
-# Created database with specified columns, return id of the created db
-def create_database(client, page_id, title, is_inline=True):
+def reset_start_date(initial_start_date: datetime, days_factor: int, daily_minutes: int) -> tuple[datetime, int]:
+    start_date = initial_start_date + timedelta(days=days_factor)
+    start_date = start_date.replace(
+        hour=initial_start_date.hour, minute=initial_start_date.minute, second=0, microsecond=0
+    )
+    return start_date, daily_minutes
+
+
+def determine_lecture_type(lecture_title: str) -> str:
+    lecture_types = ["quiz", "practice", "challenge", "assignment"]
+    for lec_type in lecture_types:
+        if lec_type in lecture_title.lower():
+            return lec_type
+    return "Lecture"
+
+
+def lecture_duration(duration_str: str) -> int:
+    parts = list(map(int, duration_str.split(':')))
+    if len(parts) == 2:
+        return parts[0] * 60 + parts[1]
+    elif len(parts) == 3:
+        return parts[0] * 60 + parts[1] + math.ceil(parts[2] / 60)
+    return 0
+
+
+def section_total_minutes(duration_str: str) -> int:
+    hours = int(re.search(r'(\d+)\s*hr', duration_str.lower()).group(1)) if 'hr' in duration_str else 0
+    minutes = int(re.search(r'(\d+)\s*min', duration_str.lower()).group(1)) if 'min' in duration_str else 0
+    return hours * 60 + minutes
+
+
+# Notion related functions
+
+def create_database(client: Client, page_id: str, title: str, is_inline: bool = True) -> str:
     db = {
         "parent": {"type": "page_id", "page_id": page_id},
         "is_inline": is_inline,
-        "title": [
-            {
-                "type": "text", "text": {"content": title}
-            }
-        ],
+        "title": [{"type": "text", "text": {"content": title}}],
         "properties": {
             "Done": {"checkbox": {}},
             "Lecture": {"title": {}},
@@ -165,7 +212,6 @@ def create_database(client, page_id, title, is_inline=True):
             },
             "Time": {"number": {}},
             "Date": {"date": {}},
-
         }
     }
 
@@ -173,48 +219,43 @@ def create_database(client, page_id, title, is_inline=True):
     return response["id"]
 
 
-# creates a page in a database
-def create_page(client, database_id, properties):
-    new_page = {
-        "parent": {"database_id": database_id},
-        "properties": properties
-    }
+def create_page(client: Client, database_id: str, properties: dict) -> dict:
+    new_page = {"parent": {"database_id": database_id}, "properties": properties}
     return client.pages.create(**new_page)
 
 
-# prepares data to be filled in a database
-def prepare_page_properties(section_title, lecture_title, duration, start_date, end_date, lec_type):
-    return {
+def prepare_page_properties(section_title: str, lecture_title: str, duration: int, start_date: datetime,
+                            end_date: datetime, lec_type: str) -> dict:
+    page = {
         "Lecture": {"title": [{"text": {"content": lecture_title}}]},
-        "Section": {"select": {"name": section_title}},
-        "Type": {"select": {"name": lec_type}},
         "Time": {"number": duration},
+        "Section": {"select": {"name": section_title}},
         "Date": {"date": {"start": start_date.isoformat(), "end": end_date.isoformat()}}
     }
+    if lec_type:
+        page["Type"] = {"select": {"name": lec_type}}
+
+    return page
 
 
-# from MM:SS or HH:MM:SS to minutes
-def duration_to_minutes(duration_str):
-    parts = duration_str.split(':')
-    if len(parts) == 2:
-        return math.ceil(int(parts[0]) + int(parts[1]) / 60)
-    elif len(parts) == 3:
-        return math.ceil(int(parts[0]) * 60 + int(parts[1]) + int(parts[2]) / 60)
-    else:
-        return None
-
-
-# created a block in a page
-def create_block(client, page_id, block_type, text):
-    if block_type not in ["paragraph", "heading_1", "heading_2", "heading_3", "bulleted_list_item",
-                          "numbered_list_item", "to_do", "toggle", "code", "quote", "callout", "embed", "bookmark",
-                          "image", "video", "pdf", "file", "audio", "table", "table_row", "divider", "breadcrumb",
-                          "table_of_contents", "link_to_page", "synced_block", "template", "column", "column_list",
-                          "ai_block"]:
+def create_block(client: Client, page_id: str, block_type: str, text: str) -> None:
+    block_type_allowed = [
+        "paragraph", "heading_1", "heading_2", "heading_3", "bulleted_list_item",
+        "numbered_list_item", "to_do", "toggle", "code", "quote", "callout", "embed",
+        "bookmark", "image", "video", "pdf", "file", "audio", "table", "table_row", "divider",
+        "breadcrumb", "table_of_contents", "link_to_page", "synced_block", "template", "column",
+        "column_list", "ai_block"
+    ]
+    if block_type not in block_type_allowed:
         raise ValueError("Invalid block type specified.")
 
     new_block = {
         "children": [
-            {"object": "block", "type": block_type,
-             block_type: {"rich_text": [{"type": "text", "text": {"content": text}}]}}]}
-    return client.blocks.children.append(block_id=page_id, **new_block)
+            {
+                "object": "block",
+                "type": block_type,
+                block_type: {"rich_text": [{"type": "text", "text": {"content": text}}]}
+            }
+        ]
+    }
+    client.blocks.children.append(block_id=page_id, **new_block)
