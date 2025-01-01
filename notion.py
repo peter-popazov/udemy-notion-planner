@@ -1,9 +1,11 @@
 import os
 import math
 import re
+
 from dotenv import load_dotenv
 from notion_client import Client
 from datetime import datetime, timedelta
+from constatnts import *
 
 SKIP_LECTURE_TIME = 20
 
@@ -14,8 +16,10 @@ def setup_notion() -> tuple[Client, str]:
     token = os.getenv('NOTION_TOKEN')
     page_id = os.getenv('NOTION_PAGE_ID')
 
-    if not token or not page_id:
-        raise ValueError("Missing Notion token or page ID")
+    if not token or not token.strip():
+        raise ValueError("Notion token is empty or missing")
+    if not page_id or not page_id.strip():
+        raise ValueError("Page ID is empty or missing")
 
     client = Client(auth=token)
     create_block(client, page_id, "callout", "This database was generated automatically")
@@ -27,12 +31,7 @@ def planner_create_block(data: dict) -> None:
     client, page_id = setup_notion()
     db_id = create_database(client, page_id, data['title'])
 
-    user_inputs = get_user_input()
-    start_date = user_inputs['start_date']
-    daily_minutes = user_inputs['daily_minutes']
-    days_factor = user_inputs['days_factor']
-    play_speed = user_inputs['play_speed']
-
+    start_date, daily_minutes, days_factor, play_speed = get_user_input()
     current_date = start_date
 
     for section in data['sections']:
@@ -65,16 +64,13 @@ def planner_create_block(data: dict) -> None:
             counter_parts += 1
 
 
-def planer_create(data: dict) -> None:
+def planer_create_separate(data: dict) -> None:
     client, page_id = setup_notion()
     db_id = create_database(client, page_id, data['title'])
 
-    user_inputs = get_user_input()
-    start_date = initial_start_date = user_inputs['start_date']
-    daily_minutes = user_inputs['daily_minutes']
-    days_factor = user_inputs['days_factor']
-    play_speed = user_inputs['play_speed']
+    start_date, daily_minutes, days_factor, play_speed = get_user_input()
     daily_minutes_remaining = daily_minutes
+    initial_start_date = start_date
 
     for section in data['sections']:
         for lecture in section['lectures']:
@@ -114,7 +110,6 @@ def get_user_input():
         except ValueError:
             print("\nInvalid date or time format. Please try again.")
 
-    # Daily hours input
     while True:
         try:
             daily_hours = float(input("How many hours a day do you want to study?: "))
@@ -126,7 +121,6 @@ def get_user_input():
         except ValueError:
             print("Invalid input. Please enter a valid number of hours.")
 
-    # Days factor input
     while True:
         try:
             days_factor = int(input("You want to study every i.e. 1 day, 2 days, etc.: "))
@@ -134,7 +128,6 @@ def get_user_input():
         except ValueError:
             print("Invalid input. Please enter a valid number of days i.e. 1, 2, 3, etc.")
 
-    # Video play speed input
     while True:
         play_speed = input('You usually play video at which speed (e.g., 0.75x, 1x, etc.). Enter only number: ').strip()
         if play_speed:
@@ -143,18 +136,16 @@ def get_user_input():
         else:
             print("Please enter a valid number.")
 
-    return {'start_date': start_date, 'daily_minutes': daily_minutes, 'days_factor': days_factor,
-            'play_speed': play_speed}
+    return start_date, daily_minutes, days_factor, play_speed
 
 
-def reset_start_date(initial_start_date: datetime, days_factor: int, daily_minutes: int) -> tuple[datetime, int]:
-    start_date = initial_start_date + timedelta(days=days_factor)
-    start_date = start_date.replace(
-        hour=initial_start_date.hour, minute=initial_start_date.minute, second=0, microsecond=0
-    )
-    return start_date, daily_minutes
+def reset_start_date(start_date: datetime, interval_days: int, minutes_per_day: int) -> tuple[datetime, int]:
+    updated_date = start_date + timedelta(days=interval_days)
+    updated_date = updated_date.replace(hour=start_date.hour, minute=start_date.minute, second=0, microsecond=0)
+    return updated_date, minutes_per_day
 
 
+# todo: add AI
 def determine_lecture_type(lecture_title: str) -> str:
     lecture_types = ["quiz", "practice", "challenge", "assignment"]
     for lec_type in lecture_types:
@@ -191,23 +182,12 @@ def create_database(client: Client, page_id: str, title: str, is_inline: bool = 
             "Section": {"select": {}},
             "Status": {
                 "select": {
-                    "options": [
-                        {"name": "Comfortable", "color": "green"},
-                        {"name": "OK", "color": "blue"},
-                        {"name": "Need more Info", "color": "red"},
-                        {"name": "Skipped", "color": "yellow"}
-                    ]
+                    "options": STATUS_OPTIONS
                 }
             },
             "Type": {
                 "select": {
-                    "options": [
-                        {"name": "Lecture", "color": "yellow"},
-                        {"name": "Practice", "color": "blue"},
-                        {"name": "Assignment", "color": "green"},
-                        {"name": "Quiz", "color": "orange"},
-                        {"name": "Challenge", "color": "red"}
-                    ]
+                    "options": TYPE_OPTIONS
                 }
             },
             "Time": {"number": {}},
@@ -239,14 +219,7 @@ def prepare_page_properties(section_title: str, lecture_title: str, duration: in
 
 
 def create_block(client: Client, page_id: str, block_type: str, text: str) -> None:
-    block_type_allowed = [
-        "paragraph", "heading_1", "heading_2", "heading_3", "bulleted_list_item",
-        "numbered_list_item", "to_do", "toggle", "code", "quote", "callout", "embed",
-        "bookmark", "image", "video", "pdf", "file", "audio", "table", "table_row", "divider",
-        "breadcrumb", "table_of_contents", "link_to_page", "synced_block", "template", "column",
-        "column_list", "ai_block"
-    ]
-    if block_type not in block_type_allowed:
+    if block_type not in ALLOWED_BLOCK_TYPES:
         raise ValueError("Invalid block type specified.")
 
     new_block = {
