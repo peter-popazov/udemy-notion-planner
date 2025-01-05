@@ -139,7 +139,7 @@ def get_user_input():
     return start_date, daily_minutes, days_factor, play_speed
 
 
-def reset_start_date(start_date: datetime, interval_days: int, minutes_per_day: int) -> tuple[datetime, int]:
+def reset_start_date(start_date: datetime, interval_days: int, minutes_per_day: float) -> tuple[datetime, int]:
     updated_date = start_date + timedelta(days=interval_days)
     updated_date = updated_date.replace(hour=start_date.hour, minute=start_date.minute, second=0, microsecond=0)
     return updated_date, minutes_per_day
@@ -204,7 +204,7 @@ def create_page(client: Client, database_id: str, properties: dict) -> dict:
     return client.pages.create(**new_page)
 
 
-def prepare_page_properties(section_title: str, lecture_title: str, duration: int, start_date: datetime,
+def prepare_page_properties(section_title: str, lecture_title: str, duration: float, start_date: datetime,
                             end_date: datetime, lec_type: str) -> dict:
     page = {
         "Lecture": {"title": [{"text": {"content": lecture_title}}]},
