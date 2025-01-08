@@ -1,0 +1,1263 @@
+{
+    "title": "No title found",
+    "sections": [
+        {
+            "section_title": "Introduction to Microservices Architecture",
+            "time": "34min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to the course & Agenda",
+                    "duration": "06:24"
+                },
+                {
+                    "lecture_title": "Details of Source Code, PDF Content & other instructions for the course",
+                    "duration": "00:59"
+                },
+                {
+                    "lecture_title": "Evolution of Microservices architecture",
+                    "duration": "17:27"
+                },
+                {
+                    "lecture_title": "Comparisons between Monolithic, SOA & Microservices architecture",
+                    "duration": "07:22"
+                },
+                {
+                    "lecture_title": "Definition of Microservices",
+                    "duration": "01:51"
+                }
+            ]
+        },
+        {
+            "section_title": "Building microservices using Spring Boot",
+            "time": "4hr 40min",
+            "lectures": [
+                {
+                    "lecture_title": "How to build microservices",
+                    "duration": "03:59"
+                },
+                {
+                    "lecture_title": "Introduction to SpringBoot framework",
+                    "duration": "07:52"
+                },
+                {
+                    "lecture_title": "Funny memes of SpringBoot framework",
+                    "duration": "04:25"
+                },
+                {
+                    "lecture_title": "Introduction to REST APIs & best practices",
+                    "duration": "07:16"
+                },
+                {
+                    "lecture_title": "IntelliJ IDEA Ultimate",
+                    "duration": "00:39"
+                },
+                {
+                    "lecture_title": "Creating a Spring Boot project",
+                    "duration": "12:37"
+                },
+                {
+                    "lecture_title": "Say Hello to your new AI Coding Companion",
+                    "duration": "09:38"
+                },
+                {
+                    "lecture_title": "Creating Hello World REST API using @RestController",
+                    "duration": "08:09"
+                },
+                {
+                    "lecture_title": "Configuring H2 DB & YAML properties",
+                    "duration": "14:45"
+                },
+                {
+                    "lecture_title": "IMPORTANT : Issue related to Lombok in IntelliJ IDEA",
+                    "duration": "00:41"
+                },
+                {
+                    "lecture_title": "Writing Spring Data JPA entities & repositories to interact with DB tables",
+                    "duration": "17:50"
+                },
+                {
+                    "lecture_title": "Introduction to DTO (Data Transfer Object) pattern",
+                    "duration": "06:35"
+                },
+                {
+                    "lecture_title": "Creating DTOs inside accounts microservice",
+                    "duration": "09:19"
+                },
+                {
+                    "lecture_title": "CREATE API inside accounts microservice - Part 1",
+                    "duration": "16:39"
+                },
+                {
+                    "lecture_title": "CREATE API inside accounts microservice - Part 2",
+                    "duration": "22:07"
+                },
+                {
+                    "lecture_title": "READ API inside accounts microservice",
+                    "duration": "14:54"
+                },
+                {
+                    "lecture_title": "UPDATE API inside accounts microservice",
+                    "duration": "09:37"
+                },
+                {
+                    "lecture_title": "DELETE API inside accounts microservice",
+                    "duration": "07:59"
+                },
+                {
+                    "lecture_title": "Handle all types of runtime exceptions using global logic inside accounts",
+                    "duration": "04:52"
+                },
+                {
+                    "lecture_title": "Perform input data validations inside accounts microservice",
+                    "duration": "14:49"
+                },
+                {
+                    "lecture_title": "Update audit columns using Spring Data",
+                    "duration": "07:31"
+                },
+                {
+                    "lecture_title": "Introduction to documentation of REST APIs using springdoc openapi",
+                    "duration": "11:03"
+                },
+                {
+                    "lecture_title": "Enhancing documentation of REST APIs using @OpenAPIDefinition",
+                    "duration": "08:09"
+                },
+                {
+                    "lecture_title": "Enhancing documentation of REST APIs using @Tag, @Operation, @ApiResponse",
+                    "duration": "07:45"
+                },
+                {
+                    "lecture_title": "Enhancing documentation of REST APIs using @Schema & example data - Part 1",
+                    "duration": "09:15"
+                },
+                {
+                    "lecture_title": "Enhancing documentation of REST APIs using @Schema & example data - Part 2",
+                    "duration": "04:23"
+                },
+                {
+                    "lecture_title": "Important Annotations & Classes that supports building REST services",
+                    "duration": "06:48"
+                },
+                {
+                    "lecture_title": "Assignment to build Loans & Cards microservices",
+                    "duration": "03:37"
+                },
+                {
+                    "lecture_title": "Deep dive and demo of Loans microservice",
+                    "duration": "16:31"
+                },
+                {
+                    "lecture_title": "Deep dive and demo of Cards microservice",
+                    "duration": "10:12"
+                }
+            ]
+        },
+        {
+            "section_title": "How do we right size our microservices & identify boundaries",
+            "time": "35min",
+            "lectures": [
+                {
+                    "lecture_title": "Approaches to identify boundaries & right size microservices",
+                    "duration": "13:04"
+                },
+                {
+                    "lecture_title": "Sizing & identifying boundaries with a Bank App use case",
+                    "duration": "06:05"
+                },
+                {
+                    "lecture_title": "Sizing & identifying boundaries with a ecommerce migration use case",
+                    "duration": "07:57"
+                },
+                {
+                    "lecture_title": "Strangler Fig pattern",
+                    "duration": "08:03"
+                }
+            ]
+        },
+        {
+            "section_title": "Handle deployment&portability &  scalability of microservices using Docker",
+            "time": "2hr 55min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to challenges while building, deploying microservices",
+                    "duration": "09:12"
+                },
+                {
+                    "lecture_title": "What are Containers & how they are different from VMs",
+                    "duration": "11:23"
+                },
+                {
+                    "lecture_title": "Definition of Containers, Containerization, Docker",
+                    "duration": "10:59"
+                },
+                {
+                    "lecture_title": "Introduction to Docker components & its architecture",
+                    "duration": "07:04"
+                },
+                {
+                    "lecture_title": "Docker installation & docker hub introduction",
+                    "duration": "07:18"
+                },
+                {
+                    "lecture_title": "Introduction to the three approaches for Docker image generation",
+                    "duration": "03:22"
+                },
+                {
+                    "lecture_title": "Generate Docker Image of Accounts microservice with Dockerfile - Part 1",
+                    "duration": "10:22"
+                },
+                {
+                    "lecture_title": "Generate Docker Image of Accounts microservice with Dockerfile - Part 2",
+                    "duration": "07:42"
+                },
+                {
+                    "lecture_title": "Generate Docker Image of Accounts microservice with Dockerfile - Part 3",
+                    "duration": "07:14"
+                },
+                {
+                    "lecture_title": "Running accounts microservice as a Docker container",
+                    "duration": "15:37"
+                },
+                {
+                    "lecture_title": "Challenges with Dockerfile approach to generate a Docker image",
+                    "duration": "04:41"
+                },
+                {
+                    "lecture_title": "Generate Docker Image of Loans microservice with Buildpacks",
+                    "duration": "12:10"
+                },
+                {
+                    "lecture_title": "Generate Docker Image of Cards microservice with Google Jib",
+                    "duration": "11:58"
+                },
+                {
+                    "lecture_title": "Compare Dockerfile, Buildpacks, Jib approaches",
+                    "duration": "06:36"
+                },
+                {
+                    "lecture_title": "Pushing Docker images from your local to remote Docker hub repository",
+                    "duration": "08:28"
+                },
+                {
+                    "lecture_title": "Introduction to Docker Compose",
+                    "duration": "12:34"
+                },
+                {
+                    "lecture_title": "Running all microservice containers using Docker Compose command",
+                    "duration": "04:57"
+                },
+                {
+                    "lecture_title": "Demo of docker compose commands",
+                    "duration": "02:58"
+                },
+                {
+                    "lecture_title": "Deep dive on Docker commands",
+                    "duration": "10:45"
+                },
+                {
+                    "lecture_title": "Introduction to Docker extensions and LogsExplorer",
+                    "duration": "03:11"
+                },
+                {
+                    "lecture_title": "Funny memes of Docker",
+                    "duration": "06:35"
+                }
+            ]
+        },
+        {
+            "section_title": "Deep Dive on Cloud Native Apps & 15-Factor methodology",
+            "time": "1hr 1min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to Cloud-native applications",
+                    "duration": "04:35"
+                },
+                {
+                    "lecture_title": "Important characteristics of cloud-native applications",
+                    "duration": "05:29"
+                },
+                {
+                    "lecture_title": "Differences between cloud-native Apps & Traditional enterprise Apps",
+                    "duration": "03:25"
+                },
+                {
+                    "lecture_title": "Introduction to 12-factor & 15-factor methodologies",
+                    "duration": "04:43"
+                },
+                {
+                    "lecture_title": "Deepdive on 15-factor methodology - Part 1",
+                    "duration": "15:04"
+                },
+                {
+                    "lecture_title": "Deepdive on 15-factor methodology - Part 2",
+                    "duration": "12:33"
+                },
+                {
+                    "lecture_title": "Deepdive on 15-factor methodology - Part 3",
+                    "duration": "14:55"
+                }
+            ]
+        },
+        {
+            "section_title": "Configurations Management in Microservices",
+            "time": "4hr 44min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to Configurations Management challenges inside microservices",
+                    "duration": "06:54"
+                },
+                {
+                    "lecture_title": "How Configurations work in Spring Boot",
+                    "duration": "10:06"
+                },
+                {
+                    "lecture_title": "Reading configurations using @Value annotation",
+                    "duration": "13:26"
+                },
+                {
+                    "lecture_title": "Reading configurations using Environment interface",
+                    "duration": "07:03"
+                },
+                {
+                    "lecture_title": "Reading configurations using @ConfigurationProperties",
+                    "duration": "12:49"
+                },
+                {
+                    "lecture_title": "Introduction to Spring Boot profiles",
+                    "duration": "05:26"
+                },
+                {
+                    "lecture_title": "Demo of Spring Boot profiles inside accounts microservice",
+                    "duration": "10:05"
+                },
+                {
+                    "lecture_title": "Externalizing configurations using command-line, JVM & environment options",
+                    "duration": "06:01"
+                },
+                {
+                    "lecture_title": "Activating the profile using command-line, JVM & environment options",
+                    "duration": "09:39"
+                },
+                {
+                    "lecture_title": "Assignment to make SpringBoot profile changes inside loans & cards microservices",
+                    "duration": "02:07"
+                },
+                {
+                    "lecture_title": "Demo of Spring Boot profile changes inside loans & cards microservices",
+                    "duration": "08:32"
+                },
+                {
+                    "lecture_title": "Drawbacks of externalized configurations using SpringBoot alone",
+                    "duration": "06:30"
+                },
+                {
+                    "lecture_title": "Introduction to Spring Cloud Config",
+                    "duration": "06:33"
+                },
+                {
+                    "lecture_title": "Building Config Server using Spring Cloud Config",
+                    "duration": "10:02"
+                },
+                {
+                    "lecture_title": "Reading configurations from the class path location of Config Server",
+                    "duration": "11:27"
+                },
+                {
+                    "lecture_title": "Updating Accounts Microservice to read properties from Config Server",
+                    "duration": "09:31"
+                },
+                {
+                    "lecture_title": "Updating Loans & Cards Microservice to read properties from Config Server",
+                    "duration": "05:24"
+                },
+                {
+                    "lecture_title": "Reading configurations from a file system location",
+                    "duration": "05:08"
+                },
+                {
+                    "lecture_title": "Reading configurations from a GitHub repository",
+                    "duration": "11:41"
+                },
+                {
+                    "lecture_title": "Encryption & Decryption of properties inside Config server",
+                    "duration": "08:52"
+                },
+                {
+                    "lecture_title": "Refresh configurations at runtime using refresh actuator path",
+                    "duration": "17:41"
+                },
+                {
+                    "lecture_title": "Refresh configurations at runtime using Spring Cloud Bus",
+                    "duration": "15:45"
+                },
+                {
+                    "lecture_title": "Refresh config at runtime using Spring Cloud Bus & Spring Cloud Config monitor",
+                    "duration": "15:29"
+                },
+                {
+                    "lecture_title": "Updating Docker Compose file to adapt Config Server changes - Part 1",
+                    "duration": "12:15"
+                },
+                {
+                    "lecture_title": "Introduction to Liveness and Readiness probes",
+                    "duration": "10:13"
+                },
+                {
+                    "lecture_title": "Updating Docker Compose file to adapt Config Server changes - Part 2",
+                    "duration": "11:32"
+                },
+                {
+                    "lecture_title": "Optimizing Docker Compose file",
+                    "duration": "08:37"
+                },
+                {
+                    "lecture_title": "Generating Docker images and pushing them into Docker Hub",
+                    "duration": "06:47"
+                },
+                {
+                    "lecture_title": "Testing Config Server changes end to end using Docker compose & default profile",
+                    "duration": "12:17"
+                },
+                {
+                    "lecture_title": "Preparing Docker Compose files for QA & prod profiles",
+                    "duration": "06:05"
+                }
+            ]
+        },
+        {
+            "section_title": "Using MySQL Database inside microservices",
+            "time": "1hr 3min",
+            "lectures": [
+                {
+                    "lecture_title": "Create MySQL DB containers for microservices",
+                    "duration": "18:30"
+                },
+                {
+                    "lecture_title": "Update microservices code to replace H2 DB with MySQL DB",
+                    "duration": "14:58"
+                },
+                {
+                    "lecture_title": "Update docker compose file to create & use MySQL DB",
+                    "duration": "14:53"
+                },
+                {
+                    "lecture_title": "Running microservices & MySQL DB containers using docker compose file",
+                    "duration": "07:51"
+                },
+                {
+                    "lecture_title": "Demo of Docker network concept",
+                    "duration": "07:05"
+                }
+            ]
+        },
+        {
+            "section_title": "Service Discovery & Service Registration in microservices",
+            "time": "2hr 40min",
+            "lectures": [
+                {
+                    "lecture_title": "Brief introduction about microservices traffic",
+                    "duration": "04:55"
+                },
+                {
+                    "lecture_title": "Introduction to the Service Discovery & Registration inside microservices",
+                    "duration": "05:07"
+                },
+                {
+                    "lecture_title": "Why not traditional load balancers for Microservices",
+                    "duration": "11:29"
+                },
+                {
+                    "lecture_title": "Service Discovery & Registration inside microservices",
+                    "duration": "05:58"
+                },
+                {
+                    "lecture_title": "How Client side Service Discovery & Load-balancing works",
+                    "duration": "13:19"
+                },
+                {
+                    "lecture_title": "Spring Cloud support for Service Discovery & Registration",
+                    "duration": "08:27"
+                },
+                {
+                    "lecture_title": "Setup Service Discovery agent using Eureka server",
+                    "duration": "14:32"
+                },
+                {
+                    "lecture_title": "Make code changes in Accounts microservice to connect Eureka Server",
+                    "duration": "11:02"
+                },
+                {
+                    "lecture_title": "Make code changes in Loans & Cards microservice to connect Eureka Server",
+                    "duration": "06:53"
+                },
+                {
+                    "lecture_title": "De-registration from Eureka server when microservices shutdown",
+                    "duration": "05:31"
+                },
+                {
+                    "lecture_title": "Demo of heartbeats mechanism to Eureka server from clients",
+                    "duration": "03:22"
+                },
+                {
+                    "lecture_title": "Feign Client code changes to invoke other microservices - Part 1",
+                    "duration": "10:55"
+                },
+                {
+                    "lecture_title": "Feign Client code changes to invoke other microservices - Part 2",
+                    "duration": "18:58"
+                },
+                {
+                    "lecture_title": "Eureka Self-Preservation mode to avoid network trap issues",
+                    "duration": "12:55"
+                },
+                {
+                    "lecture_title": "Generating Docker images with Service Discovery changes & push them into Dock",
+                    "duration": "05:55"
+                },
+                {
+                    "lecture_title": "Updating Docker Compose file to adapt Service Discovery changes",
+                    "duration": "06:29"
+                },
+                {
+                    "lecture_title": "Starting all the microservices using docker compose file",
+                    "duration": "07:58"
+                },
+                {
+                    "lecture_title": "Demo of Client Side Service Discovery & Load balancing",
+                    "duration": "06:00"
+                },
+                {
+                    "lecture_title": "IMPORTANT NOTE ON GRAALVM",
+                    "duration": "00:18"
+                }
+            ]
+        },
+        {
+            "section_title": "Gateway&Routing & Cross cutting concerns in Microservices",
+            "time": "2hr 4min",
+            "lectures": [
+                {
+                    "lecture_title": "Challenges while dealing external communication in microservices",
+                    "duration": "04:59"
+                },
+                {
+                    "lecture_title": "Why we need a Edge Server or API Gateway inside microservices",
+                    "duration": "09:45"
+                },
+                {
+                    "lecture_title": "Introduction to Spring Cloud Gateway",
+                    "duration": "05:53"
+                },
+                {
+                    "lecture_title": "Deep dive on Spring Cloud Gateway internal architecture",
+                    "duration": "07:37"
+                },
+                {
+                    "lecture_title": "Building Edge Server using Spring Cloud Gateway",
+                    "duration": "11:36"
+                },
+                {
+                    "lecture_title": "Demo of Edge Server with default routing configs",
+                    "duration": "09:40"
+                },
+                {
+                    "lecture_title": "Make changes inside Gateway server to accept service names with lower case",
+                    "duration": "02:27"
+                },
+                {
+                    "lecture_title": "Implementing Custom Routing using Spring Cloud Gateway",
+                    "duration": "12:02"
+                },
+                {
+                    "lecture_title": "Demo of addResponseHeader filter",
+                    "duration": "07:02"
+                },
+                {
+                    "lecture_title": "Implementing Cross cutting concerns Tracing & Logging using Gateway - Part 1",
+                    "duration": "13:12"
+                },
+                {
+                    "lecture_title": "Implementing Cross cutting concerns Tracing & Logging using Gateway - Part 2",
+                    "duration": "14:12"
+                },
+                {
+                    "lecture_title": "Design patterns around API Gateway",
+                    "duration": "09:39"
+                },
+                {
+                    "lecture_title": "Generating and pushing Docker images with Spring Cloud Gateway changes",
+                    "duration": "06:42"
+                },
+                {
+                    "lecture_title": "Updating Docker Compose file to adapt Spring Cloud Gateway changes",
+                    "duration": "09:00"
+                }
+            ]
+        },
+        {
+            "section_title": "Making Microservices Resilient",
+            "time": "2hr 42min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to the need of Resiliency inside microservices",
+                    "duration": "09:03"
+                },
+                {
+                    "lecture_title": "Typical use case or scenario for the need of Resiliency",
+                    "duration": "04:29"
+                },
+                {
+                    "lecture_title": "Deepdive on Circuit Breaker pattern",
+                    "duration": "07:20"
+                },
+                {
+                    "lecture_title": "Three states of Circuit Breaker pattern",
+                    "duration": "04:50"
+                },
+                {
+                    "lecture_title": "Implementing Circuit Breaker pattern in Gateway - Part 1",
+                    "duration": "17:06"
+                },
+                {
+                    "lecture_title": "Implementing Circuit Breaker pattern in Gateway - Part 2",
+                    "duration": "05:30"
+                },
+                {
+                    "lecture_title": "Implementing Circuit Breaker pattern with Feign Client - Part 1",
+                    "duration": "09:42"
+                },
+                {
+                    "lecture_title": "Implementing Circuit Breaker pattern with Feign Client - Part 2",
+                    "duration": "07:21"
+                },
+                {
+                    "lecture_title": "Http timeout configurations",
+                    "duration": "10:28"
+                },
+                {
+                    "lecture_title": "Introduction to Retry pattern",
+                    "duration": "04:13"
+                },
+                {
+                    "lecture_title": "Implementing Retry pattern in Gateway",
+                    "duration": "10:48"
+                },
+                {
+                    "lecture_title": "Implementing Retry pattern in accounts - Part 1",
+                    "duration": "13:06"
+                },
+                {
+                    "lecture_title": "Implementing Retry pattern in accounts - Part 2",
+                    "duration": "08:48"
+                },
+                {
+                    "lecture_title": "Introduction to Rate Limitter pattern",
+                    "duration": "04:51"
+                },
+                {
+                    "lecture_title": "Introduction to Redis RateLimiter in Gateway Server",
+                    "duration": "09:32"
+                },
+                {
+                    "lecture_title": "Implementing Redis RateLimiter in Gateway Server",
+                    "duration": "09:50"
+                },
+                {
+                    "lecture_title": "Implementing RateLimiter pattern in accounts",
+                    "duration": "08:20"
+                },
+                {
+                    "lecture_title": "Introduction to Bulkhead pattern",
+                    "duration": "06:55"
+                },
+                {
+                    "lecture_title": "Aspect order of Resiliency patterns",
+                    "duration": "02:30"
+                },
+                {
+                    "lecture_title": "Demo of Resiliency patterns using Docker containers & Docker compose",
+                    "duration": "07:25"
+                }
+            ]
+        },
+        {
+            "section_title": "Observability and monitoring of microservices",
+            "time": "3hr 6min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to Observability And Monitoring Of Microservices",
+                    "duration": "05:48"
+                },
+                {
+                    "lecture_title": "Observability vs. Monitoring",
+                    "duration": "09:28"
+                },
+                {
+                    "lecture_title": "Introduction to centralized logging or Log Aggregation in microservices",
+                    "duration": "04:56"
+                },
+                {
+                    "lecture_title": "Introduction to managing logs with Grafana, Loki & Promtail",
+                    "duration": "06:50"
+                },
+                {
+                    "lecture_title": "IMPORTANT NOTE ON PROMTAIL",
+                    "duration": "00:36"
+                },
+                {
+                    "lecture_title": "Sample demo of logging using Grafana, Loki & promtail - Theory",
+                    "duration": "05:39"
+                },
+                {
+                    "lecture_title": "Implementing logging using Grafana, Loki & promtail - Part 1",
+                    "duration": "16:15"
+                },
+                {
+                    "lecture_title": "Implementing logging using Grafana, Loki & promtail - Part 2",
+                    "duration": "06:49"
+                },
+                {
+                    "lecture_title": "Implementing logging using Grafana, Loki & promtail - Part 3",
+                    "duration": "13:21"
+                },
+                {
+                    "lecture_title": "Managing metrics & monitoring with Actuator, Micrometer, Prometheus & Grafana",
+                    "duration": "08:32"
+                },
+                {
+                    "lecture_title": "Setup of micrometer inside microservices",
+                    "duration": "07:11"
+                },
+                {
+                    "lecture_title": "Setup of prometheus inside microservices",
+                    "duration": "07:51"
+                },
+                {
+                    "lecture_title": "Demo of Prometheus",
+                    "duration": "09:59"
+                },
+                {
+                    "lecture_title": "Demo of Prometheus & Grafana integration",
+                    "duration": "03:42"
+                },
+                {
+                    "lecture_title": "Demo of Grafana inbuilt & custom Dashboards",
+                    "duration": "09:31"
+                },
+                {
+                    "lecture_title": "Create Alerts & Send notifications using Grafana - Approach 1",
+                    "duration": "11:19"
+                },
+                {
+                    "lecture_title": "Create Alerts & Send notifications using Grafana - Approach 2",
+                    "duration": "07:38"
+                },
+                {
+                    "lecture_title": "Introduction to Distributed Tracing in microservices",
+                    "duration": "09:47"
+                },
+                {
+                    "lecture_title": "Introduction to OpenTelemetry",
+                    "duration": "06:08"
+                },
+                {
+                    "lecture_title": "Implement OpenTelemetry changes inside microservices",
+                    "duration": "09:19"
+                },
+                {
+                    "lecture_title": "Implementing Tracing using Grafana, Tempo & OpenTelemetry - Part 1",
+                    "duration": "07:28"
+                },
+                {
+                    "lecture_title": "Implementing Tracing using Grafana, Tempo & OpenTelemetry - Part 2",
+                    "duration": "04:54"
+                },
+                {
+                    "lecture_title": "Implementing Tracing using Grafana, Tempo & OpenTelemetry - Part 3",
+                    "duration": "05:31"
+                },
+                {
+                    "lecture_title": "Navigating to Tempo from Loki logs",
+                    "duration": "05:04"
+                },
+                {
+                    "lecture_title": "Conclusion of Observability and Monitoring",
+                    "duration": "02:53"
+                }
+            ]
+        },
+        {
+            "section_title": "Microservices Security",
+            "time": "2hr 49min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to Microservices Security",
+                    "duration": "05:29"
+                },
+                {
+                    "lecture_title": "Problems that OAuth2 solves",
+                    "duration": "09:28"
+                },
+                {
+                    "lecture_title": "Introduction to OAuth2",
+                    "duration": "05:24"
+                },
+                {
+                    "lecture_title": "OAuth2 jargons or terminologies or roles",
+                    "duration": "08:43"
+                },
+                {
+                    "lecture_title": "What is OpenID Connect & why it is important",
+                    "duration": "09:01"
+                },
+                {
+                    "lecture_title": "Introduction to IAM products & why KeyCloak",
+                    "duration": "03:34"
+                },
+                {
+                    "lecture_title": "Deep dive of Client Credentials grant type flow",
+                    "duration": "07:42"
+                },
+                {
+                    "lecture_title": "Securing Gateway server using Client Credentials grant type flow - Theory",
+                    "duration": "10:31"
+                },
+                {
+                    "lecture_title": "Setup Auth server using KeyCloak",
+                    "duration": "05:14"
+                },
+                {
+                    "lecture_title": "Register client details inside KeyCloak for Client credentials grant flow",
+                    "duration": "05:18"
+                },
+                {
+                    "lecture_title": "Getting Access token from Auth Server in Client credentials grant flow",
+                    "duration": "08:02"
+                },
+                {
+                    "lecture_title": "Securing Gateway server as a Resource server - Part 1",
+                    "duration": "13:47"
+                },
+                {
+                    "lecture_title": "Securing Gateway server as a Resource server - Part 2",
+                    "duration": "07:30"
+                },
+                {
+                    "lecture_title": "Implement Authorization inside Gateway server using Roles - Part 1",
+                    "duration": "11:26"
+                },
+                {
+                    "lecture_title": "Implement Authorization inside Gateway server using Roles - Part 2",
+                    "duration": "04:18"
+                },
+                {
+                    "lecture_title": "Deep dive of Authorization Code grant type flow",
+                    "duration": "12:11"
+                },
+                {
+                    "lecture_title": "Securing Gateway server using Authorization Code grant type flow - Theory",
+                    "duration": "06:38"
+                },
+                {
+                    "lecture_title": "Register client & end user inside KeyCloak for Authorization code grant flow",
+                    "duration": "07:05"
+                },
+                {
+                    "lecture_title": "Demo of Authorization code grant type flow",
+                    "duration": "09:07"
+                },
+                {
+                    "lecture_title": "Demo of Microservices Security using Docker containers & Docker compose - Part 1",
+                    "duration": "06:01"
+                },
+                {
+                    "lecture_title": "Demo of Microservices Security using Docker containers & Docker compose - Part 2",
+                    "duration": "12:17"
+                }
+            ]
+        },
+        {
+            "section_title": "Event Driven microservices using RabbitMQ,Spring Cloud Functions & Stream",
+            "time": "2hr 1min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to Event-driven microservices",
+                    "duration": "07:38"
+                },
+                {
+                    "lecture_title": "Introduction to Event-driven models",
+                    "duration": "03:26"
+                },
+                {
+                    "lecture_title": "What we are going to build using a pub sub model",
+                    "duration": "06:01"
+                },
+                {
+                    "lecture_title": "Introduction to RabbitMQ",
+                    "duration": "07:31"
+                },
+                {
+                    "lecture_title": "Why to use Spring Cloud Function",
+                    "duration": "09:44"
+                },
+                {
+                    "lecture_title": "Develop message microservice using Spring Cloud Functions - Part 1",
+                    "duration": "06:05"
+                },
+                {
+                    "lecture_title": "Develop message microservice using Spring Cloud Functions - Part 2",
+                    "duration": "09:34"
+                },
+                {
+                    "lecture_title": "Develop message microservice using Spring Cloud Functions - Part 3",
+                    "duration": "09:58"
+                },
+                {
+                    "lecture_title": "Why to use Spring Cloud Stream",
+                    "duration": "08:10"
+                },
+                {
+                    "lecture_title": "Update message & accounts microservices to stream & process the events - Part 1",
+                    "duration": "14:29"
+                },
+                {
+                    "lecture_title": "Demo of Async communication or event streaming using Rabbit MQ - Part 1",
+                    "duration": "11:47"
+                },
+                {
+                    "lecture_title": "Update message & accounts microservices to stream & process the events - Part 2",
+                    "duration": "14:09"
+                },
+                {
+                    "lecture_title": "Demo of Async communication or event streaming using Rabbit MQ - Part 2",
+                    "duration": "04:04"
+                },
+                {
+                    "lecture_title": "Demo of Async comm or event streaming using Docker containers & Docker compose",
+                    "duration": "08:33"
+                }
+            ]
+        },
+        {
+            "section_title": "Event Driven microservices using Kafka&Spring Cloud Functions & Stream",
+            "time": "55min",
+            "lectures": [
+                {
+                    "lecture_title": "Apache Kafka Vs RabbitMQ",
+                    "duration": "04:18"
+                },
+                {
+                    "lecture_title": "Introduction to Apache Kafka",
+                    "duration": "15:27"
+                },
+                {
+                    "lecture_title": "Producer and Consumer side stories",
+                    "duration": "09:43"
+                },
+                {
+                    "lecture_title": "Installation of Apache Kafka",
+                    "duration": "04:38"
+                },
+                {
+                    "lecture_title": "Implement & Demo of Async communication or event streaming using Kafka",
+                    "duration": "11:06"
+                },
+                {
+                    "lecture_title": "Demo of Async comm or event streaming using Docker containers & Docker Compose",
+                    "duration": "09:35"
+                }
+            ]
+        },
+        {
+            "section_title": "Container Orchestration using Kubernetes",
+            "time": "2hr 36min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to the challenges related to container orchestration",
+                    "duration": "08:40"
+                },
+                {
+                    "lecture_title": "Introduction to Kubernetes",
+                    "duration": "05:30"
+                },
+                {
+                    "lecture_title": "Deep dive on Kubernetes internal architecture",
+                    "duration": "14:35"
+                },
+                {
+                    "lecture_title": "Setup a local Kubernetes cluster using Docker Desktop",
+                    "duration": "10:03"
+                },
+                {
+                    "lecture_title": "Deploying the Kubernetes Dashboard UI",
+                    "duration": "22:06"
+                },
+                {
+                    "lecture_title": "Deep dive on Kubernetes YAML configurations to deploy a microservice",
+                    "duration": "16:57"
+                },
+                {
+                    "lecture_title": "Deploying ConfigServer into Kubernetes Cluster",
+                    "duration": "06:41"
+                },
+                {
+                    "lecture_title": "Create environment variables inside Kubernetes Cluster using ConfigMap",
+                    "duration": "07:20"
+                },
+                {
+                    "lecture_title": "Preparing Kubernetes manifest files for remaining microservices",
+                    "duration": "09:29"
+                },
+                {
+                    "lecture_title": "Deploying remaining microservices into Kubernetes Cluster",
+                    "duration": "11:50"
+                },
+                {
+                    "lecture_title": "Automatic Self healing inside Kubernetes cluster",
+                    "duration": "06:01"
+                },
+                {
+                    "lecture_title": "Automatic Rollout & Rollback inside Kubernetes cluster",
+                    "duration": "13:26"
+                },
+                {
+                    "lecture_title": "Introduction to Kubernetes Service types",
+                    "duration": "11:10"
+                },
+                {
+                    "lecture_title": "Demo of Kubernetes Service types",
+                    "duration": "06:50"
+                },
+                {
+                    "lecture_title": "Problems with manually created Kubernetes manifest files",
+                    "duration": "05:48"
+                }
+            ]
+        },
+        {
+            "section_title": "Deep dive on Helm",
+            "time": "2hr 31min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to Helm & the problems that it solves",
+                    "duration": "10:05"
+                },
+                {
+                    "lecture_title": "Installing Helm",
+                    "duration": "05:35"
+                },
+                {
+                    "lecture_title": "Installing a sample Helm Chart",
+                    "duration": "11:34"
+                },
+                {
+                    "lecture_title": "Understanding Helm Chart structure",
+                    "duration": "08:23"
+                },
+                {
+                    "lecture_title": "Creating our own Helm chart & template files",
+                    "duration": "17:00"
+                },
+                {
+                    "lecture_title": "Creating Helm chart for Accounts microservice",
+                    "duration": "11:09"
+                },
+                {
+                    "lecture_title": "Creating Helm charts for other microservices",
+                    "duration": "07:01"
+                },
+                {
+                    "lecture_title": "Creating Helm charts for Dev, QA and Prod environment",
+                    "duration": "08:41"
+                },
+                {
+                    "lecture_title": "Demo of helm template command",
+                    "duration": "05:34"
+                },
+                {
+                    "lecture_title": "Install KeyCloak in Kubernetes Cluster using Helm Chart",
+                    "duration": "12:10"
+                },
+                {
+                    "lecture_title": "Install Kafka in Kubernetes Cluster using Helm Chart",
+                    "duration": "07:22"
+                },
+                {
+                    "lecture_title": "Install Prometheus in Kubernetes Cluster using Helm Chart",
+                    "duration": "06:06"
+                },
+                {
+                    "lecture_title": "Install Grafana Loki & Tempo in Kubernetes Cluster using Helm Chart",
+                    "duration": "05:44"
+                },
+                {
+                    "lecture_title": "Install Grafana in Kubernetes Cluster using Helm Chart",
+                    "duration": "07:01"
+                },
+                {
+                    "lecture_title": "Install eazybank microservices in Kubernetes Cluster using Helm Chart",
+                    "duration": "10:12"
+                },
+                {
+                    "lecture_title": "Demo of helm upgrade command",
+                    "duration": "05:24"
+                },
+                {
+                    "lecture_title": "Demo of helm history and rollback commands",
+                    "duration": "03:39"
+                },
+                {
+                    "lecture_title": "Demo of helm uninstall command",
+                    "duration": "04:30"
+                },
+                {
+                    "lecture_title": "Quick revision of important helm commands",
+                    "duration": "03:34"
+                }
+            ]
+        },
+        {
+            "section_title": "Server-side service discovery and load balancing using Kubernetes",
+            "time": "55min",
+            "lectures": [
+                {
+                    "lecture_title": "Introduction to Server-side service discovery and load balancing",
+                    "duration": "07:52"
+                },
+                {
+                    "lecture_title": "How to setup discovery server in K8s cluster using spring cloud kubernetes",
+                    "duration": "10:58"
+                },
+                {
+                    "lecture_title": "Install spring cloud kubernetes discovery server in K8s cluster",
+                    "duration": "04:10"
+                },
+                {
+                    "lecture_title": "Making Kubernetes Discovery Client changes in microservices - Part 1",
+                    "duration": "09:30"
+                },
+                {
+                    "lecture_title": "Making Kubernetes Discovery Client changes in microservices - Part 2",
+                    "duration": "05:45"
+                },
+                {
+                    "lecture_title": "Updating Helm charts for Kubernetes Discovery Server changes",
+                    "duration": "11:39"
+                },
+                {
+                    "lecture_title": "Demo of Server-side service discovery and load balancing",
+                    "duration": "05:22"
+                }
+            ]
+        },
+        {
+            "section_title": "Deploying microservices into cloud Kubernetes cluster",
+            "time": "43min",
+            "lectures": [
+                {
+                    "lecture_title": "Kubernetes support by Cloud providers",
+                    "duration": "02:55"
+                },
+                {
+                    "lecture_title": "Set up Google Cloud account & install Google Cloud SDK",
+                    "duration": "08:01"
+                },
+                {
+                    "lecture_title": "Create a Kubernetes cluster in Google Cloud",
+                    "duration": "03:18"
+                },
+                {
+                    "lecture_title": "Installing all our microservices and supporting components in Google Cloud K8s",
+                    "duration": "09:56"
+                },
+                {
+                    "lecture_title": "Demo of eazybank microservices using Google Cloud Kubernetes Cluster",
+                    "duration": "09:23"
+                },
+                {
+                    "lecture_title": "Validate Grafana components in Google Cloud Kubernetes Cluster",
+                    "duration": "04:15"
+                },
+                {
+                    "lecture_title": "Deleting the Google Cloud Kubernetes Cluster",
+                    "duration": "04:47"
+                }
+            ]
+        },
+        {
+            "section_title": "Introduction to Kubernetes Ingress&Service Mesh (Istio) & mTLS",
+            "time": "1hr 7min",
+            "lectures": [
+                {
+                    "lecture_title": "Quick introduction to Kubernetes Ingress",
+                    "duration": "03:43"
+                },
+                {
+                    "lecture_title": "Deep dive on Kubernetes Ingress & Ingress Controller",
+                    "duration": "11:00"
+                },
+                {
+                    "lecture_title": "Benefits of Kubernetes Ingress & the kind of traffic it handles",
+                    "duration": "07:33"
+                },
+                {
+                    "lecture_title": "Introduction to Service Mesh & it's capabilities",
+                    "duration": "11:40"
+                },
+                {
+                    "lecture_title": "Introduction to Service mesh components",
+                    "duration": "06:55"
+                },
+                {
+                    "lecture_title": "Introduction to mTLS & deep dive on how TLS works",
+                    "duration": "14:48"
+                },
+                {
+                    "lecture_title": "How does mTLS works",
+                    "duration": "11:35"
+                }
+            ]
+        },
+        {
+            "section_title": "Tips for the microservices developers",
+            "time": "50min",
+            "lectures": [
+                {
+                    "lecture_title": "Optimizing Microservices Development with Spring Boot BOM - Part 1",
+                    "duration": "03:41"
+                },
+                {
+                    "lecture_title": "Optimizing Microservices Development with Spring Boot BOM - Part 2",
+                    "duration": "09:00"
+                },
+                {
+                    "lecture_title": "Optimizing Microservices Development with Spring Boot BOM - Part 3",
+                    "duration": "13:39"
+                },
+                {
+                    "lecture_title": "Optimizing Microservices Development with Spring Boot BOM - Part 4",
+                    "duration": "07:35"
+                },
+                {
+                    "lecture_title": "Shared Libraries in Microservices - Part 1",
+                    "duration": "06:54"
+                },
+                {
+                    "lecture_title": "Shared Libraries in Microservices - Part 2",
+                    "duration": "08:53"
+                }
+            ]
+        },
+        {
+            "section_title": "Thank You & Congratulations",
+            "time": "2min",
+            "lectures": [
+                {
+                    "lecture_title": "Congratulations & Thank You",
+                    "duration": "02:25"
+                }
+            ]
+        }
+    ]
+}

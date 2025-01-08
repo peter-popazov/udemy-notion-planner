@@ -1,11 +1,15 @@
-import os
 import math
+import os
 import re
+
+from notion_helpers import prepare_page_properties, create_page, create_database, create_block
+from datetime import datetime
+from datetime import timedelta
 
 from dotenv import load_dotenv
 from notion_client import Client
-from datetime import datetime, timedelta
-from constatnts import *
+
+from predict_category import predict_lecture_category
 
 SKIP_LECTURE_TIME = 20
 
@@ -35,7 +39,7 @@ def planner_create_block(data: dict) -> None:
     current_date = start_date
 
     for section in data['sections']:
-        section_time = round(section_total_minutes(section['time']) / play_speed)
+        section_time = math.ceil(section_total_minutes(section['time']) / play_speed)
         counter_parts = 1
 
         while section_time > 0:
@@ -48,14 +52,15 @@ def planner_create_block(data: dict) -> None:
             start_date_next = current_date
             end_date = start_date_next + timedelta(minutes=time_for_page)
 
-            properties = prepare_page_properties(
-                section['section_title'],
-                f"{section['section_title']} p.{counter_parts}",
-                time_for_page,
-                start_date_next,
-                end_date,
-                ""
-            )
+            properties = prepare_page_properties({
+                "title": f"{section['section_title']} p.{counter_parts}",
+                "category": "",
+                "duration": time_for_page,
+                "section_title": section["section_title"],
+                "start_date": start_date_next,
+                "end_date": end_date
+            })
+
             response = create_page(client, db_id, properties)
             print(f"Created database page with ID: {response['id']}")
 
@@ -64,37 +69,63 @@ def planner_create_block(data: dict) -> None:
             counter_parts += 1
 
 
-def planer_create_separate(data: dict) -> None:
+def planner_create_separate(data: dict) -> None:
     client, page_id = setup_notion()
     db_id = create_database(client, page_id, data['title'])
 
     start_date, daily_minutes, days_factor, play_speed = get_user_input()
-    daily_minutes_remaining = daily_minutes
-    initial_start_date = start_date
+    current_date = start_date
+    remaining_minutes = daily_minutes
+    counter = 0
 
     for section in data['sections']:
+        section_title = section['section_title']
+
         for lecture in section['lectures']:
             lecture_title = lecture['lecture_title']
-            duration_min = lecture_duration(lecture['duration']) // play_speed
-            lec_type = determine_lecture_type(lecture_title)
 
-            if duration_min > daily_minutes_remaining:
-                start_date, daily_minutes_remaining = reset_start_date(initial_start_date, days_factor, daily_minutes)
+            duration_min = math.ceil(get_lecture_duration(lecture['duration']) / play_speed)
+            category = predict_lecture_category(lecture_title)
 
-            end_date = start_date + timedelta(minutes=duration_min)
-            daily_minutes_remaining -= duration_min
-
-            if daily_minutes_remaining < 0:
-                start_date, daily_minutes_remaining = reset_start_date(
-                    initial_start_date, days_factor, daily_minutes - duration_min
+            # If lecture won't fit in current day's remaining time, move to the next day
+            if duration_min > remaining_minutes:
+                current_date = start_date + timedelta(days=(days_factor * counter))
+                current_date = current_date.replace(
+                    hour=start_date.hour,
+                    minute=start_date.minute,
+                    second=0,
+                    microsecond=0
                 )
+                remaining_minutes = daily_minutes
+                counter += 1
 
-            properties = prepare_page_properties(
-                section['section_title'], lecture_title, duration_min, start_date, end_date, lec_type
-            )
+            lecture_end = current_date + timedelta(minutes=duration_min)
+
+            properties = prepare_page_properties({
+                "title": lecture_title,
+                "category": category,
+                "duration": duration_min,
+                "section_title": section_title,
+                "start_date": current_date,
+                "end_date": lecture_end
+            })
+
             response = create_page(client, db_id, properties)
             print(f"Created database page with ID: {response['id']}")
-            start_date = end_date
+
+            remaining_minutes -= duration_min
+            current_date = lecture_end
+
+            if duration_min > remaining_minutes:
+                current_date = start_date + timedelta(days=(days_factor * counter))
+                current_date = current_date.replace(
+                    hour=start_date.hour,
+                    minute=start_date.minute,
+                    second=0,
+                    microsecond=0
+                )
+                remaining_minutes = daily_minutes
+                counter += 1
 
 
 def get_user_input():
@@ -139,25 +170,16 @@ def get_user_input():
     return start_date, daily_minutes, days_factor, play_speed
 
 
-def reset_start_date(start_date: datetime, interval_days: int, minutes_per_day: float) -> tuple[datetime, int]:
+def reset_start_date(start_date: datetime, interval_days: int, minutes_per_day: float) -> tuple[datetime, float]:
     updated_date = start_date + timedelta(days=interval_days)
     updated_date = updated_date.replace(hour=start_date.hour, minute=start_date.minute, second=0, microsecond=0)
     return updated_date, minutes_per_day
 
 
-# todo: add AI
-def determine_lecture_type(lecture_title: str) -> str:
-    lecture_types = ["quiz", "practice", "challenge", "assignment"]
-    for lec_type in lecture_types:
-        if lec_type in lecture_title.lower():
-            return lec_type
-    return "Lecture"
-
-
-def lecture_duration(duration_str: str) -> int:
+def get_lecture_duration(duration_str: str) -> int:
     parts = list(map(int, duration_str.split(':')))
     if len(parts) == 2:
-        return parts[0] * 60 + parts[1]
+        return parts[0] + math.ceil(parts[1] / 60)
     elif len(parts) == 3:
         return parts[0] * 60 + parts[1] + math.ceil(parts[2] / 60)
     return 0
@@ -167,68 +189,3 @@ def section_total_minutes(duration_str: str) -> int:
     hours = int(re.search(r'(\d+)\s*hr', duration_str.lower()).group(1)) if 'hr' in duration_str else 0
     minutes = int(re.search(r'(\d+)\s*min', duration_str.lower()).group(1)) if 'min' in duration_str else 0
     return hours * 60 + minutes
-
-
-# Notion related functions
-
-def create_database(client: Client, page_id: str, title: str, is_inline: bool = True) -> str:
-    db = {
-        "parent": {"type": "page_id", "page_id": page_id},
-        "is_inline": is_inline,
-        "title": [{"type": "text", "text": {"content": title}}],
-        "properties": {
-            "Done": {"checkbox": {}},
-            "Lecture": {"title": {}},
-            "Section": {"select": {}},
-            "Status": {
-                "select": {
-                    "options": STATUS_OPTIONS
-                }
-            },
-            "Type": {
-                "select": {
-                    "options": TYPE_OPTIONS
-                }
-            },
-            "Time": {"number": {}},
-            "Date": {"date": {}},
-        }
-    }
-
-    response = client.databases.create(**db)
-    return response["id"]
-
-
-def create_page(client: Client, database_id: str, properties: dict) -> dict:
-    new_page = {"parent": {"database_id": database_id}, "properties": properties}
-    return client.pages.create(**new_page)
-
-
-def prepare_page_properties(section_title: str, lecture_title: str, duration: float, start_date: datetime,
-                            end_date: datetime, lec_type: str) -> dict:
-    page = {
-        "Lecture": {"title": [{"text": {"content": lecture_title}}]},
-        "Time": {"number": duration},
-        "Section": {"select": {"name": section_title}},
-        "Date": {"date": {"start": start_date.isoformat(), "end": end_date.isoformat()}}
-    }
-    if lec_type:
-        page["Type"] = {"select": {"name": lec_type}}
-
-    return page
-
-
-def create_block(client: Client, page_id: str, block_type: str, text: str) -> None:
-    if block_type not in ALLOWED_BLOCK_TYPES:
-        raise ValueError("Invalid block type specified.")
-
-    new_block = {
-        "children": [
-            {
-                "object": "block",
-                "type": block_type,
-                block_type: {"rich_text": [{"type": "text", "text": {"content": text}}]}
-            }
-        ]
-    }
-    client.blocks.children.append(block_id=page_id, **new_block)

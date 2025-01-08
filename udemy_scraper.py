@@ -1,5 +1,6 @@
 import time
 import sys
+import json
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -79,7 +80,6 @@ def scrape_udemy_course(url: str) -> dict:
                                                        'section--item-content-summary--Aq9em')
             duration = duration_tag.text.strip()
 
-            # todo: replace with AI
             if "question" in duration or "questions" in duration:
                 duration = "30:00"
 
@@ -91,4 +91,10 @@ def scrape_udemy_course(url: str) -> dict:
         course_data["sections"].append(section_data)
 
     print(f"\nData from {url} has been collected successfully")
+
+    file_name = "course.json"
+    with open(file_name, "w") as file:
+        json.dump(course_data, file, indent=4)
+    print("\nCourse data has been saved successfully to " + file_name)
+
     return course_data

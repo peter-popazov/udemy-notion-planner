@@ -36,8 +36,8 @@ def train():
     print("Classification Report:\n", classification_report(y_test, y_pred))
     print("Accuracy Score:", accuracy_score(y_test, y_pred))
 
-    dump(svm_model, './model/svm_model.joblib')
-    dump(vectorizer, './model/vectorizer.joblib')
-    dump(scaler, './model/scaler.joblib')
+    dump(svm_model, '../model/svm_model.joblib')
+    dump(vectorizer, '../model/vectorizer.joblib')
+    dump(scaler, '../model/scaler.joblib')
 
 train()

@@ -6,11 +6,14 @@ STATUS_OPTIONS = [
 ]
 
 TYPE_OPTIONS = [
-    {"name": "Lecture", "color": "yellow"},
-    {"name": "Practice", "color": "blue"},
-    {"name": "Assignment", "color": "green"},
-    {"name": "Quiz", "color": "orange"},
-    {"name": "Challenge", "color": "red"}
+    {"name": "lecture", "color": "yellow"},
+    {"name": "coding", "color": "blue"},
+    {"name": "assignment", "color": "green"},
+    {"name": "quiz", "color": "orange"},
+    {"name": "lab", "color": "red"},
+    {"name": "coding", "color": "gray"},
+    {"name": "project", "color": "yellow"},
+    {"name": "discussion", "color": "gray"},
 ]
 
 ALLOWED_BLOCK_TYPES = {
