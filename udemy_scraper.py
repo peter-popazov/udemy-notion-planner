@@ -56,7 +56,7 @@ def scrape_udemy_course(url: str) -> dict:
         section_title_tag = section.find('span', class_='section--section-title--svpHP')
         section_title = section_title_tag.text.strip() if section_title_tag else 'No section title found'
 
-        section_title = section_title.replace(", ", "&")
+        section_title = section_title.replace(",", "&")
 
         time_section = section.find('span', class_='ud-text-sm section--hidden-on-mobile---ITMr '
                                                    'section--section-content--2mUJ7').find('span').text

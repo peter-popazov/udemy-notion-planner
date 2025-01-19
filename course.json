@@ -878,7 +878,7 @@
             ]
         },
         {
-            "section_title": "Event Driven microservices using RabbitMQ,Spring Cloud Functions & Stream",
+            "section_title": "Event Driven microservices using RabbitMQ & Spring Cloud Functions & Stream",
             "time": "2hr 1min",
             "lectures": [
                 {

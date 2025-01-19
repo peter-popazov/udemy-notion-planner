@@ -54,7 +54,7 @@ def planner_create_block(data: dict) -> None:
 
             properties = prepare_page_properties({
                 "title": f"{section['section_title']} p.{counter_parts}",
-                "category": "",
+                "category": "study block",
                 "duration": time_for_page,
                 "section_title": section["section_title"],
                 "start_date": start_date_next,
@@ -160,7 +160,7 @@ def get_user_input():
             print("Invalid input. Please enter a valid number of days i.e. 1, 2, 3, etc.")
 
     while True:
-        play_speed = input('You usually play video at which speed (e.g., 0.75x, 1x, etc.). Enter only number: ').strip()
+        play_speed = input('You usually play video at what speed (e.g., 0.75x, 1x, etc.). Enter only number: ').strip()
         if play_speed:
             play_speed = float(play_speed)
             break
